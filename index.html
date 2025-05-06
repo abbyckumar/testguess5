@@ -290,10 +290,11 @@ function initGame(canonicalAnswers, allAnswerMap) {
           ans.style.color = "red";
           ans.style.fontWeight = "bold";
         } else if (revealFirstLetterHints[i]) {
-          ans.textContent = correctAnswer.charAt(0) + ' _'.repeat(correctAnswer.length - 1);
-          ans.style.color = "#888";
-          ans.style.fontStyle = "italic";
-        } else {
+  const hint = prompt.answers[i].hint;
+  ans.textContent = "💡 " + (hint || "No hint available.");
+  ans.style.color = "#888";
+  ans.style.fontStyle = "italic";
+} else {
           ans.textContent = "_____";
         }
 
@@ -340,5 +341,3 @@ updateCountdown();
   </script>
 </body>
 </html>
-
-
