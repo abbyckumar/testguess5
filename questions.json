@@ -3,10 +3,10 @@
   "question": "Top 5 highest-grossing movies of all time",
   "answers": [
     { "canonical": "Avatar", "aliases": [] },
-    { "canonical": "Avengers: Endgame", "aliases": ["Endgame", "End Game"] },
+    { "canonical": "Avengers: Endgame", "aliases": ["Endgame", "End Game", "Avengers Endgame", "Avengers - Endgame", "Avengers End Game", "Avengers - End Game"] },
     { "canonical": "Titanic", "aliases": [] },
-    { "canonical": "Star Wars: The Force Awakens", "aliases": ["The Force Awakens"] },
-    { "canonical": "Avengers: Infinity War", "aliases": ["Infinity War"] }
+    { "canonical": "Star Wars: The Force Awakens", "aliases": ["The Force Awakens", "Star Wars The Force Awakens"] },
+    { "canonical": "Avengers: Infinity War", "aliases": ["Infinity War", "Avengers - Infinity War", "Avengers Infinity War"] }
   ]
   },
   {
