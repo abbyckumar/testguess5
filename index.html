@@ -241,7 +241,7 @@ function initGame(canonicalAnswers, allAnswerMap) {
       result.className = 'result-item';
       if (index !== -1 && !correctGuesses[index]) {
         correctGuesses[index] = guess;
-        result.textContent = `✅ ${guess} is #${index + 1}`;
+        result.textContent = `✅ ${prompt.answers[index].canonical} is #${index + 1}`;
         result.classList.add("correct");
       } else {
         result.textContent = `❌ ${guess}`;
@@ -342,4 +342,5 @@ updateCountdown();
   </script>
 </body>
 </html>
+
 
