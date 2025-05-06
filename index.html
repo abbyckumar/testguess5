@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guess 5 - Daily Top 5 Quiz</title>
+  <style>
+    /* styles omitted for brevity */
+  </style>
+</head>
+<body>
+  <!-- HTML content omitted for brevity -->
+  <p class="streak" style="margin-top: 30px; font-weight: bold;">🔥 Your Streak: <span id="streakEnd">0</span></p>
+  <script>
+    let questionBank = [];
+    let prompt;
+    let startTime, endTime;
+    let guessCount = 0;
+    let revealFirstLetterHints = [false, false, false, false, false];
+
+    fetch('questions.json')
+      .then(res => res.json())
+      .then(bank => {
+        questionBank = bank;
+        const today = new Date();
+        const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+        const questionIndex = dayOfYear % questionBank.length;
+        prompt = questionBank[questionIndex];
+
+        const canonicalAnswers = prompt.answers.map(a => a.canonical.toLowerCase());
+        const allAnswerMap = {};
+        prompt.answers.forEach(a => {
+          const canon = a.canonical.toLowerCase();
+          allAnswerMap[canon] = canon;
+          a.aliases.forEach(alias => {
+            allAnswerMap[alias.toLowerCase()] = canon;
+          });
+        });
+
+        document.getElementById("question").innerText = prompt.question;
+        initGame(canonicalAnswers, allAnswerMap);
+      });
+
+    function initGame(canonicalAnswers, allAnswerMap) {
+      const today = new Date().toDateString();
+      const storedDate = localStorage.getItem("guess5Date");
+      let streak = parseInt(localStorage.getItem("guess5Streak") || "0");
+      document.getElementById("streak").innerText = streak;
+      const streakEnd = document.getElementById("streakEnd");
+      if (streakEnd) streakEnd.innerText = streak;
+
+      const correctGuesses = JSON.parse(localStorage.getItem("guess5Guesses") || "[null,null,null,null,null]");
+      let timeLeft = 90;
+      let timerStarted = false;
+      let timer;
+
+      if (storedDate === today) {
+        document.getElementById("guessBox").style.display = 'none';
+        document.getElementById('topFiveGrid').style.display = 'none';
+        document.getElementById('results').style.display = 'none';
+        document.querySelector('.timer').style.display = 'none';
+        document.getElementById("nextGame").style.display = "block";
+      } else {
+        document.querySelector('.guess-box').style.display = 'flex';
+        document.getElementById('topFiveGrid').style.display = 'grid';
+        document.getElementById('results').style.display = 'block';
+        document.querySelector('.timer').style.display = 'block';
+        document.getElementById("guessInput").addEventListener("keyup", function(event) {
+          if (event.key === "Enter") submitGuess();
+        });
+
+        window.submitGuess = function() {
+          const guess = document.getElementById("guessInput").value.trim();
+          document.getElementById("guessInput").value = "";
+          if (!guess) return;
+
+          if (!timerStarted) {
+            timerStarted = true;
+            startTime = Date.now();
+            timer = setInterval(() => {
+              timeLeft--;
+              document.getElementById("timer").innerText = timeLeft + "s";
+
+              if (timeLeft === 30) {
+                for (let i = 0; i < 5; i++) {
+                  if (!correctGuesses[i]) {
+                    revealFirstLetterHints[i] = true;
+                  }
+                }
+                renderTopFive(correctGuesses);
+              }
+
+              if (timeLeft <= 0) {
+                clearInterval(timer);
+                renderTopFive(correctGuesses, true);
+                endGame(false);
+              }
+            }, 1000);
+          }
+
+          guessCount++;
+          const guessKey = guess.toLowerCase();
+          const normalized = allAnswerMap[guessKey];
+          const index = canonicalAnswers.indexOf(normalized);
+          const result = document.createElement("p");
+          result.className = 'result-item';
+          if (index !== -1 && !correctGuesses[index]) {
+            correctGuesses[index] = guess;
+            result.textContent = `✅ ${guess} is #${index + 1}`;
+            result.classList.add("correct");
+          } else {
+            result.textContent = `❌ ${guess}`;
+            result.classList.add("incorrect");
+          }
+          document.getElementById("results").appendChild(result);
+          renderTopFive(correctGuesses);
+
+          if (correctGuesses.filter(Boolean).length === 5) {
+            clearInterval(timer);
+            endTime = Date.now();
+            endGame(true);
+          }
+        }
+
+        window.endGame = function(completed) {
+          localStorage.setItem("guess5Guesses", JSON.stringify(correctGuesses));
+          localStorage.setItem("guess5Date", today);
+          if (completed) {
+            streak++;
+            localStorage.setItem("guess5Streak", streak);
+            const streakEnd = document.getElementById("streakEnd");
+            if (streakEnd) streakEnd.innerText = streak;
+            launchConfetti();
+          } else {
+            streak = 0;
+            localStorage.setItem("guess5Streak", "0");
+          }
+          document.getElementById("streak").innerText = streak;
+          showNextGameScreen();
+        }
+
+        window.renderTopFive = function(guesses, showMissing = false) {
+          const grid = document.getElementById("topFiveGrid");
+          grid.innerHTML = "";
+          for (let i = 0; i < 5; i++) {
+            const num = document.createElement("div");
+            num.textContent = `#${i + 1}`;
+
+            const ans = document.createElement("div");
+            const userAnswer = guesses[i];
+            const correctAnswer = prompt.answers[i].canonical || prompt.answers[i];
+
+            if (userAnswer) {
+              ans.textContent = userAnswer;
+            } else if (showMissing) {
+              ans.textContent = correctAnswer;
+              ans.style.color = "red";
+              ans.style.fontWeight = "bold";
+            } else if (revealFirstLetterHints[i]) {
+              ans.textContent = correctAnswer.charAt(0) + ' _'.repeat(correctAnswer.length - 1);
+              ans.style.color = "#888";
+              ans.style.fontStyle = "italic";
+            } else {
+              ans.textContent = "_____";
+            }
+
+            grid.appendChild(num);
+            grid.appendChild(ans);
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
