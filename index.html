@@ -178,6 +178,15 @@ function initGame(canonicalAnswers, allAnswerMap) {
       if (!correctGuesses[i] && !revealFirstLetterHints[i]) {
         revealFirstLetterHints[i] = true;
         timeLeft = Math.max(0, timeLeft - 15);
+
+        const grid = document.getElementById("topFiveGrid").children;
+        const hintDisplay = document.createElement("div");
+        hintDisplay.textContent = "💡 Hint: " + (prompt.answers[i].hint || "No hint available.");
+        hintDisplay.style.color = "#555";
+        hintDisplay.style.fontStyle = "italic";
+        hintDisplay.style.gridColumn = "1 / span 2";
+        grid[i * 2 + 1].appendChild(hintDisplay);
+
         renderTopFive(correctGuesses);
         break;
       }
@@ -212,7 +221,7 @@ function initGame(canonicalAnswers, allAnswerMap) {
           document.getElementById("timer").innerText = timeLeft + "s";
 
           if (timeLeft === 60) {
-            hintButton.style.display = "block";
+            hintButton.style.display = "inline-block";
           }
 
           if (timeLeft <= 0) {
@@ -331,4 +340,5 @@ updateCountdown();
   </script>
 </body>
 </html>
+
 
