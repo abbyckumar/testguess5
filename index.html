@@ -198,6 +198,7 @@ function initGame(canonicalAnswers, allAnswerMap) {
     document.getElementById('topFiveGrid').style.display = 'none';
     document.getElementById('results').style.display = 'none';
     document.querySelector('.timer').style.display = 'none';
+    document.getElementById("hintButton").style.display = 'none';
     document.getElementById("nextGame").style.display = "block";
   } else {
     document.querySelector('.guess-box').style.display = 'flex';
@@ -220,7 +221,7 @@ function initGame(canonicalAnswers, allAnswerMap) {
           timeLeft--;
           document.getElementById("timer").innerText = timeLeft + "s";
 
-          if (timeLeft === 60) {
+          if (timeLeft === 75) {
             hintButton.style.display = "inline-block";
           }
 
@@ -341,3 +342,4 @@ updateCountdown();
   </script>
 </body>
 </html>
+
