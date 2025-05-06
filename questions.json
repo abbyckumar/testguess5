@@ -1,12 +1,33 @@
 [
   {
+
   "question": "Top 5 highest-grossing movies of all time",
   "answers": [
-    { "canonical": "Avatar", "aliases": [], "hint": "Blue people, James Cameron, 2009"},
-    { "canonical": "Avengers: Endgame", "aliases": ["Endgame", "End Game", "Avengers Endgame", "Avengers - Endgame", "Avengers End Game", "Avengers - End Game"]"hint": "9" },
-    { "canonical": "Titanic", "aliases": [], "hint": "I'll never let go" },
-    { "canonical": "Star Wars: The Force Awakens", "aliases": ["The Force Awakens", "Star Wars The Force Awakens"], "hint": "I am your father" },
-    { "canonical": "Avengers: Infinity War", "aliases": ["Infinity War", "Avengers - Infinity War", "Avengers Infinity War"], "hint": "There battles just go on and on " }
+    {
+      "canonical": "Avatar",
+      "aliases": ["avatar"],
+      "hint": "Tall blue smurfs save their tree."
+    },
+    {
+      "canonical": "Avengers: Endgame",
+      "aliases": ["avengers endgame", "endgame", "end game", "avengers - endgame", "avengers end game", "avengers - end game", "avengers: end game"],
+      "hint": "Time travel therapy for Marvel fans."
+    },
+    {
+      "canonical": "Avatar: The Way of Water",
+      "aliases": ["avatar the way of water", "avatar way of water", "way of water", "the way of the water", "avatar - the way of the water"],
+      "hint": "The smurfs from answer one went swimming."
+    },
+    {
+      "canonical": "Titanic",
+      "aliases": ["titanic", "the titanic"],
+      "hint": "Spoiler: the ship sinks."
+    },
+    {
+      "canonical": "Star Wars: Episode VII - The Force Awakens",
+      "aliases": ["the force awakens", "star wars the force awakens", "force awakens", "star wars episode 7", "star wars - the force awakens","star wars: the force awakens"],
+      "hint": "Old space dudes meet new space teens."
+    }
   ]
   },
   {
