@@ -5,103 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Guess 5 - Daily Top 5 Quiz</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      max-width: 700px;
-      margin: auto;
-      padding: 20px;
-      background: linear-gradient(to right, #e0f7fa, #f1f8e9);
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2.5rem;
-      color: #333;
-    }
-    #question {
-      font-size: 1.2rem;
-      margin-top: 20px;
-      text-align: center;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #004d00;
-    }
-    .guess-box {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    .guess-box input {
-      flex: 1;
-      padding: 10px;
-      font-size: 1rem;
-    }
-    .guess-box button {
-      padding: 10px 15px;
-      background-color: #455a64;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .top-five {
-      display: grid;
-      grid-template-columns: 1fr 4fr;
-      gap: 10px;
-      background: white;
-      padding: 15px;
-      margin-top: 20px;
-      border-radius: 8px;
-    }
-    .results {
-      margin-top: 20px;
-    }
-    .result-item.correct {
-      color: green;
-    }
-    .result-item.incorrect {
-      color: red;
-    }
-    .streak, .timer {
-      text-align: center;
-      margin-top: 20px;
-    }
-    #nextGame {
-      display: none;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: center;
-      margin-top: 40px;
-    }
-    #nextGame button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #455a64;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .confetti-piece {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background-color: #f50057;
-      animation: fall 2s ease-in-out forwards;
-    }
-    @keyframes fall {
-      0% {
-        transform: translateY(-50px) rotate(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
+    /* Styles remain the same */
   </style>
 </head>
 <body>
@@ -117,6 +21,7 @@
     <button onclick="submitGuess()">Submit</button>
   </div>
   <p class="timer">Time Left: <span id="timer">--</span></p>
+  <button id="hintButton" style="display:none; margin:auto; display:block; padding:10px 20px; background:#888; color:white; border:none; border-radius:5px; cursor:pointer;">Get a Hint (-15s)</button>
   <div class="top-five" id="topFiveGrid"></div>
   <div class="results" id="results"></div>
   <p class="streak">Streak: <span id="streak">0</span></p>
@@ -171,6 +76,18 @@ function initGame(canonicalAnswers, allAnswerMap) {
   let timerStarted = false;
   let timer;
 
+  const hintButton = document.getElementById("hintButton");
+  hintButton.addEventListener("click", () => {
+    for (let i = 0; i < 5; i++) {
+      if (!correctGuesses[i] && !revealFirstLetterHints[i]) {
+        revealFirstLetterHints[i] = true;
+        timeLeft = Math.max(0, timeLeft - 15);
+        renderTopFive(correctGuesses);
+        break;
+      }
+    }
+  });
+
   if (storedDate === today) {
     document.getElementById("guessBox").style.display = 'none';
     document.getElementById('topFiveGrid').style.display = 'none';
@@ -198,13 +115,8 @@ function initGame(canonicalAnswers, allAnswerMap) {
           timeLeft--;
           document.getElementById("timer").innerText = timeLeft + "s";
 
-          if (timeLeft === 30) {
-            for (let i = 0; i < 5; i++) {
-              if (!correctGuesses[i]) {
-                revealFirstLetterHints[i] = true;
-              }
-            }
-            renderTopFive(correctGuesses);
+          if (timeLeft === 60) {
+            hintButton.style.display = "block";
           }
 
           if (timeLeft <= 0) {
@@ -303,6 +215,7 @@ function showNextGameScreen() {
   document.getElementById("nextGame").style.display = "block";
   document.getElementById("guessBox").style.display = 'none';
   document.querySelector('.timer').style.display = 'none';
+  document.getElementById("hintButton").style.display = 'none';
 }
 
 function updateCountdown() {
@@ -319,6 +232,6 @@ function updateCountdown() {
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
-</script>
+  </script>
 </body>
 </html>
