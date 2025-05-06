@@ -107,7 +107,7 @@
 <body>
   <h1>GUESS 5</h1>
   <h2 style="text-align:center; font-weight:normal; margin-top:-10px;">Daily Top 5 Quiz</h2>
-  <p style="text-align: center; font-size: 0.9rem; color: #555; margin-top: 0;">
+  <p style="text-align: center; font-size: 0.9rem; color: #555; margin-top: 0; font-style: italic;">
     Created by <a href="https://www.instagram.com/abbyckumar" target="_blank" style="color: #0077cc; text-decoration: none;">@abbyckumar</a>
   </p>
   <div style="margin-top: 0.5rem;"></div>
@@ -117,7 +117,10 @@
     <button onclick="submitGuess()">Submit</button>
   </div>
   <p class="timer">Time Left: <span id="timer">--</span></p>
-  <button id="hintButton" style="display:none; visibility: hidden;">Get a Hint (-15s)</button>
+  <div style="text-align: center; margin-top: 20px;">
+  <button id="hintButton" style="display:none; visibility: hidden; background-color: #d32f2f; color: white; font-weight: bold; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer;">Get a Hint (-15s)</button>
+  <p id="hintWarning" style="color: #b71c1c; font-size: 0.85rem; margin-top: 8px; font-weight: bold; display: none;">⚠️ Using a hint takes 15 seconds off your timer</p>
+</div>
   <div class="top-five" id="topFiveGrid"></div>
   <div class="results" id="results"></div>
   <p class="streak">Streak: <span id="streak">0</span></p>
@@ -224,6 +227,7 @@ function initGame(canonicalAnswers, allAnswerMap) {
           if (timerStarted && timeLeft === 75 && hintButton.style.display === "none") {
   hintButton.style.display = "inline-block";
   hintButton.style.visibility = "visible";
+  document.getElementById("hintWarning").style.display = "block";
 }
 
           if (timeLeft <= 0) {
@@ -242,8 +246,7 @@ function initGame(canonicalAnswers, allAnswerMap) {
       result.className = 'result-item';
       if (index !== -1 && !correctGuesses[index]) {
         correctGuesses[index] = prompt.answers[index].canonical;
-        result.textContent = `✅ ${prompt.answers[index].canonical} is #${index + 1}`;
-        result.classList.add("correct");
+        return renderTopFive(correctGuesses);
       } else {
         result.textContent = `❌ ${guess}`;
         result.classList.add("incorrect");
