@@ -224,7 +224,7 @@ function initGame(canonicalAnswers, allAnswerMap) {
           timeLeft--;
           document.getElementById("timer").innerText = timeLeft + "s";
 
-          if (timerStarted && timeLeft === 75 && hintButton.style.display === "none") {
+          if (timerStarted && timeLeft === 60 && hintButton.style.display === "none") {
   hintButton.style.display = "inline-block";
   hintButton.style.visibility = "visible";
   document.getElementById("hintWarning").style.display = "block";
@@ -345,6 +345,20 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
   </script>
+
+  <div style="margin-top: 50px; padding: 20px; background: #fff8e1; border-radius: 10px; border: 1px solid #ffe082;">
+  <h3 style="text-align: center; color: #ff6f00;">How to Play 🎯</h3>
+  <ul style="font-size: 0.95rem; line-height: 1.6; padding-left: 20px; color: #444;">
+    <li>You have 90 seconds to guess the Top 5 answers to today's question.</li>
+    <li>Type your guess and hit Enter or press Submit.</li>
+    <li>If you're stuck, press the red CLUE button that appears when there's 60 seconds to go — but use it wisely as it'll cost you 15 seconds.</li>
+    <li>Get all 5 to keep your streak alive and earn some digital pride 🌟</li>
+  </ul>
+  <p style="font-size: 0.9rem; color: #555; font-style: italic; margin-top: 20px; text-align: center;">
+    This game is currently being tested by one little human (me). Feel free to send feedback — and if something breaks, don’t get angry... just bear with me as I'm just a baby. 💖
+  </p>
+</div>
+
 </body>
 </html>
 
