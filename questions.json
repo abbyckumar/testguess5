@@ -1,5 +1,4 @@
 [
-  // Question one
   {
   "question": "Top 5 highest-grossing hollywood movies of all time",
   "answers": [
@@ -30,7 +29,7 @@
     }
   ]
   },
-    // Question two
+
   {
     "question": "TOP 5 most populated countries",
     "answers": [
@@ -56,7 +55,7 @@
       }
     ]
   },
-    // Question three
+
   {
   "question": "Top 5 most-streamed artists on Spotify in 2024",
   "answers": [
