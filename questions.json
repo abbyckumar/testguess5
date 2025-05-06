@@ -1,0 +1,32 @@
+[
+  {
+  "question": "Top 5 highest-grossing movies of all time",
+  "answers": [
+    { "canonical": "Avatar", "aliases": [] },
+    { "canonical": "Avengers: Endgame", "aliases": ["Endgame"] },
+    { "canonical": "Titanic", "aliases": [] },
+    { "canonical": "Star Wars: The Force Awakens", "aliases": ["The Force Awakens"] },
+    { "canonical": "Avengers: Infinity War", "aliases": ["Infinity War"] }
+  ]
+  },
+  {
+    "question": "TOP 5 most populated countries",
+    "answers": [
+      { "canonical": "India", "aliases": [] },
+      { "canonical": "China", "aliases": [] },
+      { "canonical": "USA", "aliases": ["United States", "America", "U.S.A.","United States of America"] },
+      { "canonical": "Indonesia", "aliases": [] },
+      { "canonical": "Pakistan", "aliases": [] }
+    ]
+  },
+  {
+  "question": "Top 5 most-streamed artists on Spotify in 2024",
+  "answers": [
+    { "canonical": "Taylor Swift", "aliases": [] },
+    { "canonical": "Bad Bunny", "aliases": [] },
+    { "canonical": "The Weeknd", "aliases": [] },
+    { "canonical": "Drake", "aliases": [] },
+    { "canonical": "Billie Eilish", "aliases": [] }
+  ]
+  }
+]
