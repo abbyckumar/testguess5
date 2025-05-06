@@ -246,7 +246,7 @@ function initGame(canonicalAnswers, allAnswerMap) {
       result.className = 'result-item';
       if (index !== -1 && !correctGuesses[index]) {
         correctGuesses[index] = prompt.answers[index].canonical;
-        return renderTopFive(correctGuesses);
+        renderTopFive(correctGuesses);
       } else {
         result.textContent = `❌ ${guess}`;
         result.classList.add("incorrect");
