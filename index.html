@@ -107,7 +107,7 @@
 <body>
   <h1>GUESS 5</h1>
   <h2 style="text-align:center; font-weight:normal; margin-top:-10px;">Daily Top 5 Quiz</h2>
-  <p style="text-align: center; font-size: 0.9rem; color: #555; margin-top: 0; font-style: italic;">
+  <p style="text-align: center; font-size: 0.9rem; color: #555; margin-top: 0;">
     Created by <a href="https://www.instagram.com/abbyckumar" target="_blank" style="color: #0077cc; text-decoration: none;">@abbyckumar</a>
   </p>
   <div style="margin-top: 0.5rem;"></div>
@@ -117,7 +117,7 @@
     <button onclick="submitGuess()">Submit</button>
   </div>
   <p class="timer">Time Left: <span id="timer">--</span></p>
-  <button id="hintButton" style="display:none; margin:auto; display:block; padding:10px 20px; background:#888; color:white; border:none; border-radius:5px; cursor:pointer;">Get a Hint (-15s)</button>
+  <button id="hintButton" style="display:none; visibility: hidden;">Get a Hint (-15s)</button>
   <div class="top-five" id="topFiveGrid"></div>
   <div class="results" id="results"></div>
   <p class="streak">Streak: <span id="streak">0</span></p>
@@ -221,9 +221,10 @@ function initGame(canonicalAnswers, allAnswerMap) {
           timeLeft--;
           document.getElementById("timer").innerText = timeLeft + "s";
 
-          if (timeLeft === 75) {
-            hintButton.style.display = "inline-block";
-          }
+          if (timerStarted && timeLeft === 75 && hintButton.style.display === "none") {
+  hintButton.style.display = "inline-block";
+  hintButton.style.visibility = "visible";
+}
 
           if (timeLeft <= 0) {
             clearInterval(timer);
@@ -240,7 +241,7 @@ function initGame(canonicalAnswers, allAnswerMap) {
       const result = document.createElement("p");
       result.className = 'result-item';
       if (index !== -1 && !correctGuesses[index]) {
-        correctGuesses[index] = guess;
+        correctGuesses[index] = prompt.answers[index].canonical;
         result.textContent = `✅ ${prompt.answers[index].canonical} is #${index + 1}`;
         result.classList.add("correct");
       } else {
@@ -342,5 +343,6 @@ updateCountdown();
   </script>
 </body>
 </html>
+
 
 
