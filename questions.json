@@ -34,23 +34,23 @@
     "question": "TOP 5 most populated countries",
     "answers": [
       { "canonical": "India", 
-        "aliases": [] 
+        "aliases": [], 
         "hint": "Always fighting with #5" 
       },
       { "canonical": "China", 
-        "aliases": [] 
+        "aliases": [], 
         "hint": "Apparently use 45 billion chopsticks annually" 
       },
       { "canonical": "USA", 
-        "aliases": ["United States", "America", "U.S.A.","United States of America"]
+        "aliases": ["United States", "America", "U.S.A.","United States of America"],
         "hint": "They really like guns. Like really."
       },
       { "canonical": "Indonesia",  
-        "aliases": [] 
+        "aliases": [],
         "hint": "Over 17000 islands. Bali is one 💘" 
       },
       { "canonical": "Pakistan",  
-        "aliases": [] 
+        "aliases": [],
         "hint": "Always fighting with #1" 
       }
     ]
@@ -59,23 +59,23 @@
   "question": "Top 5 most-streamed artists on Spotify in 2024",
   "answers": [
     { "canonical": "Taylor Swift",  
-        "aliases": [] 
+        "aliases": [],
         "hint": "Can't Shake off the top spot" 
       },
     { "canonical": "Bad Bunny",  
-        "aliases": [] 
+        "aliases": [],
         "hint": "Our Puerto Rican ain't no Moscow Mule" 
       },
     { "canonical": "The Weeknd",  
-        "aliases": ["Weeknd"] 
+        "aliases": ["Weeknd"],
         "hint": "Plays in blinding lights" 
       },
     { "canonical": "Drake",  
-        "aliases": [] 
+        "aliases": [],
         "hint": "One Dance is all it takes" 
       },
     { "canonical": "Billie Eilish",  
-        "aliases": [] 
+        "aliases": [],
         "hint": "Those ocean eyes" 
       },
   ]
