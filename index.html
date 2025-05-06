@@ -165,12 +165,12 @@ fetch('questions.json')
 
 function initGame(canonicalAnswers, allAnswerMap) {
   const today = new Date().toDateString();
-  const storedDate = localStorage.getItem("guess5Date");
-  let streak = parseInt(localStorage.getItem("guess5Streak") || "0");
+  const storedDate = localStorage.getItem("testguess5Date");
+  let streak = parseInt(localStorage.getItem("testguess5Streak") || "0");
   document.getElementById("streak").innerText = streak;
   document.getElementById("streakEnd").innerText = streak;
 
-  const correctGuesses = JSON.parse(localStorage.getItem("guess5Guesses") || "[null,null,null,null,null]");
+  const correctGuesses = JSON.parse(localStorage.getItem("testguess5Guesses") || "[null,null,null,null,null]");
   let timeLeft = 90;
   let timerStarted = false;
   let timer;
@@ -262,16 +262,16 @@ function initGame(canonicalAnswers, allAnswerMap) {
     }
 
     window.endGame = function(completed) {
-      localStorage.setItem("guess5Guesses", JSON.stringify(correctGuesses));
-      localStorage.setItem("guess5Date", today);
+      localStorage.setItem("testguess5Guesses", JSON.stringify(correctGuesses));
+      localStorage.setItem("testguess5Date", today);
       if (completed) {
         streak++;
-        localStorage.setItem("guess5Streak", streak);
+        localStorage.setItem("testguess5Streak", streak);
         document.getElementById("streakEnd").innerText = streak;
         launchConfetti();
       } else {
         streak = 0;
-        localStorage.setItem("guess5Streak", "0");
+        localStorage.setItem("testguess5Streak", "0");
       }
       document.getElementById("streak").innerText = streak;
       showNextGameScreen();
