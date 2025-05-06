@@ -2,11 +2,11 @@
   {
   "question": "Top 5 highest-grossing movies of all time",
   "answers": [
-    { "canonical": "Avatar", "aliases": [] },
-    { "canonical": "Avengers: Endgame", "aliases": ["Endgame", "End Game", "Avengers Endgame", "Avengers - Endgame", "Avengers End Game", "Avengers - End Game"] },
-    { "canonical": "Titanic", "aliases": [] },
-    { "canonical": "Star Wars: The Force Awakens", "aliases": ["The Force Awakens", "Star Wars The Force Awakens"] },
-    { "canonical": "Avengers: Infinity War", "aliases": ["Infinity War", "Avengers - Infinity War", "Avengers Infinity War"] }
+    { "canonical": "Avatar", "aliases": [], "hint": "Blue people, James Cameron, 2009"},
+    { "canonical": "Avengers: Endgame", "aliases": ["Endgame", "End Game", "Avengers Endgame", "Avengers - Endgame", "Avengers End Game", "Avengers - End Game"]"hint": "9" },
+    { "canonical": "Titanic", "aliases": [], "hint": "I'll never let go" },
+    { "canonical": "Star Wars: The Force Awakens", "aliases": ["The Force Awakens", "Star Wars The Force Awakens"], "hint": "I am your father" },
+    { "canonical": "Avengers: Infinity War", "aliases": ["Infinity War", "Avengers - Infinity War", "Avengers Infinity War"], "hint": "There battles just go on and on " }
   ]
   },
   {
